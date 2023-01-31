@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     //creating user
     @Override
     public User createUser(User user, Set<UserRole> userRole) throws Exception {
-        User local =this.userRepository.findByuserName(user.getUserName());
+        User local =this.userRepository.findByuserName(user.getUsername());
         if(local !=null)
         {
             System.out.println("user is already there");
