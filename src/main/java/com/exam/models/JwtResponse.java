@@ -1,6 +1,11 @@
 package com.exam.models;
 
-public class JwtResponse {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class JwtResponse  implements Serializable {
+
+
     String token;
 
     public JwtResponse(String token) {

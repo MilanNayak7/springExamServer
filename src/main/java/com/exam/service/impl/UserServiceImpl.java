@@ -19,14 +19,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-//    public UserServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-//
-//    public UserServiceImpl(RoleRepository roleRepository) {
-//        this.roleRepository = roleRepository;
-//    }
-
 
     //creating user
     @Override

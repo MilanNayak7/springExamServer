@@ -1,20 +1,25 @@
 package com.exam.models;
 
-public class JwtRequest {
-    String username;
-    String password;
+import java.io.Serial;
+import java.io.Serializable;
+
+public class JwtRequest implements Serializable {
+
+    private String username;
+    private String password;
 
     public JwtRequest() {
 
     }
 
     public JwtRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
+
+        this.setUsername(username);
+        this.setPassword(password);
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public String getPassword() {

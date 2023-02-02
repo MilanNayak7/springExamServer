@@ -12,11 +12,12 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RestController
+@CrossOrigin
 public class AuthenticationController {
 
     @Autowired
@@ -29,11 +30,12 @@ public class AuthenticationController {
     private JwtUtils jwtUtil;
 
 
-    @PostMapping("/generate-token")
+    @RequestMapping(value = "/generate-token",method = RequestMethod.POST)
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 
 
         try {
+            System.out.println("Userr name is "+jwtRequest.getUsername()+"  "+"User password is :"+jwtRequest.getPassword());
              authenticate(jwtRequest.getUsername(),jwtRequest.getPassword());
 
         }catch (UsernameNotFoundException e){
@@ -48,6 +50,10 @@ public class AuthenticationController {
 
 
     private void authenticate(String username,String password) throws Exception {
+
+        Objects.requireNonNull(username);
+        Objects.requireNonNull(password);
+
         try{
          authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
         }catch (DisabledException e){
