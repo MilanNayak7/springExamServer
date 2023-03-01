@@ -3,6 +3,7 @@ package com.exam.controllers;
 import com.exam.config.JwtUtils;
 import com.exam.models.JwtRequest;
 import com.exam.models.JwtResponse;
+import com.exam.models.User;
 import com.exam.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Objects;
 
 @RestController
@@ -35,7 +37,7 @@ public class AuthenticationController {
 
 
         try {
-            System.out.println("Userr name is "+jwtRequest.getUsername()+"  "+"User password is :"+jwtRequest.getPassword());
+            System.out.println("User name is "+jwtRequest.getUsername()+"  "+"User password is :"+jwtRequest.getPassword());
              authenticate(jwtRequest.getUsername(),jwtRequest.getPassword());
 
         }catch (UsernameNotFoundException e){
@@ -61,6 +63,13 @@ public class AuthenticationController {
         }catch (BadCredentialsException e){
             throw new Exception("Invalid Credentials " +e.getMessage());
         }
+    }
+
+
+    // Return currently sign in user detail
+    @GetMapping("/current-user")
+    public User getCurrentUser(Principal principal){
+        return ((User) this.userDetailsServiceImpl.loadUserByUsername(principal.getName()));
     }
 
 }
