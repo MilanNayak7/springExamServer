@@ -13,7 +13,6 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long qId;
 
-
     private String title;
 
     @Column(length = 5000)

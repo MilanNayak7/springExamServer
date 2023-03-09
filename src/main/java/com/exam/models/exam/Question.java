@@ -21,7 +21,7 @@ public class Question {
     private String option4;
 
 
-    @JsonIgnore
+//    @JsonIgnore
     private String answer;
 
     @Transient
